@@ -1,329 +1,365 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Compétition Salle — Mars (Test)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-<header class="app-header">
-  <div class="brand">
-    <div class="brand__title">🏹 Compétition Salle — Mars (Test)</div>
-    <div class="brand__sub" id="subtitle">Offline • 28 cibles • AB/CD • Qualif (score final) • Duels sets (points de sets)</div>
-  </div>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand__title">🏹 Compétition Salle — Mars (Test)</div>
+      <div class="brand__sub" id="subtitle">Offline • 28 cibles • AB/CD • Qualif (score final) • Duels sets (points de
+        sets)</div>
+    </div>
 
-  <nav class="tabs" aria-label="Navigation">
-    <button class="tab is-active" data-tab="greffe">Greffe</button>
-    <button class="tab" data-tab="affectations">Affectations</button>
-    <button class="tab" data-tab="qualif">Qualif</button>
-    <button class="tab" data-tab="classement">Classement</button>
-    <button class="tab" data-tab="duels">Duels</button>
-    <button class="tab" data-tab="outils">Outils</button>
-  </nav>
-</header>
+    <nav class="tabs" aria-label="Navigation">
+      <button class="tab is-active" data-tab="greffe">Greffe</button>
+      <button class="tab" data-tab="affectations">Affectations</button>
+      <button class="tab" data-tab="qualif">Qualif</button>
+      <button class="tab" data-tab="classement">Classement</button>
+      <button class="tab" data-tab="duels">Duels</button>
+      <button class="tab" data-tab="outils">Outils</button>
+    </nav>
+  </header>
 
-<main class="wrap">
-  <!-- GREFFE -->
-  <section id="greffe" class="panel is-active">
-    <div class="grid">
-      <div class="card">
-        <h2>Paramètres</h2>
-        <div class="form grid2">
-          <label>
-            <span>Nombre de cibles</span>
-            <input id="cfgTargets" type="number" min="1" value="28" />
-          </label>
-          <label>
-            <span>Rythme</span>
-            <select id="cfgRhythm">
-              <option value="ABCD" selected>AB / CD (4 par cible)</option>
-            </select>
-          </label>
+  <main class="wrap">
+    <!-- GREFFE -->
+    <section id="greffe" class="panel is-active">
+      <div class="grid">
+        <div class="card">
+          <h2>Paramètres</h2>
+          <div class="form grid2">
+            <label>
+              <span>Nombre de cibles</span>
+              <input id="cfgTargets" type="number" min="1" value="28" />
+            </label>
+            <label>
+              <span>Rythme</span>
+              <select id="cfgRhythm">
+                <option value="ABCD" selected>AB / CD (4 par cible)</option>
+                <option value="AB">AB (2 par cible)</option>
+              </select>
+            </label>
 
-          <label>
-            <span>Qualif</span>
-            <input value="Score final uniquement" disabled />
-          </label>
-          <label>
-            <span>Duels</span>
-            <input value="Sets : saisir scores par set → points de set (1er à 5)" disabled />
-          </label>
+            <label>
+              <span>Qualif</span>
+              <input value="Score final uniquement" disabled />
+            </label>
+            <label>
+              <span>Duels</span>
+              <input value="Sets : saisir scores par set → points de set (1er à 5)" disabled />
+            </label>
 
-          <label>
-            <span>Top 16 au 2e tour</span>
-            <select id="cfgTop16Bye">
-              <option value="true" selected>Oui</option>
-              <option value="false">Non</option>
-            </select>
-          </label>
-          <label>
-            <span>Participants pris pour les duels</span>
-            <select id="cfgDuelCut">
-              <option value="all" selected>Tous les présents</option>
-              <option value="48">Top 48 (recommandé pour Top16 bye)</option>
-              <option value="32">Top 32</option>
-              <option value="64">Top 64</option>
-            </select>
-          </label>
-          <label>
-            <span>Duels : points gagnants (sets)</span>
-            <select id="cfgSetPointsToWin">
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5" selected>5</option>
-              <option value="6">6</option>
-            </select>
-          </label>
+            <label>
+              <span>Top 16 au 2e tour</span>
+              <select id="cfgTop16Bye">
+                <option value="true" selected>Oui</option>
+                <option value="false">Non</option>
+              </select>
+            </label>
+            <label>
+              <span>Participants pris pour les duels</span>
+              <select id="cfgDuelCut">
+                <option value="all" selected>Tous les présents</option>
+                <option value="48">Top 48 (recommandé pour Top16 bye)</option>
+                <option value="32">Top 32</option>
+                <option value="64">Top 64</option>
+              </select>
+            </label>
+            <label>
+              <span>Duels : points gagnants (sets)</span>
+              <select id="cfgSetPointsToWin">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected>5</option>
+                <option value="6">6</option>
+              </select>
+            </label>
 
+          </div>
+
+          <div class="row">
+            <button class="btn primary" id="saveConfig">Enregistrer</button>
+            <button class="btn" id="resetAll">Tout réinitialiser</button>
+          </div>
+
+          <p class="note">
+            ⚠️ Top 16 bye est naturellement cohérent avec un tableau de <strong>48</strong> archers.
+            Tu peux choisir “Tous”, Top 32/48/64 selon ton besoin.
+          </p>
         </div>
 
-        <div class="row">
-          <button class="btn primary" id="saveConfig">Enregistrer</button>
-          <button class="btn" id="resetAll">Tout réinitialiser</button>
-        </div>
+        <div class="card">
+          <h2>Inscriptions</h2>
 
-        <p class="note">
-          ⚠️ Top 16 bye est naturellement cohérent avec un tableau de <strong>48</strong> archers.
-          Tu peux choisir “Tous”, Top 32/48/64 selon ton besoin.
-        </p>
+          <div class="form grid3">
+            <label><span>Nom</span><input id="pNom" placeholder="DUPONT" /></label>
+            <label><span>Prénom</span><input id="pPrenom" placeholder="Camille" /></label>
+            <label><span>Club</span><input id="pClub" placeholder="Club" /></label>
+
+            <label><span>Statut</span>
+              <select id="pDebutant">
+                <option value="false" selected>Confirmé</option>
+                <option value="true">Débutant</option>
+              </select>
+            </label>
+            <label><span>Arme</span>
+              <select id="pArme">
+                <option value="CL" selected>Arc classique (CL)</option>
+                <option value="CO">Poulies (CO)</option>
+                <option value="BB">Bare-bow (BB)</option>
+              </select>
+            </label>
+            <label><span>Blason / zones</span>
+              <input id="pZones" value="Même blason • zones selon profil" disabled />
+            </label>
+          </div>
+
+          <div class="row">
+            <button class="btn primary" id="addParticipant">Ajouter</button>
+            <input id="search" class="search" placeholder="Rechercher (nom, prénom, club)…" />
+          </div>
+
+          <div class="tablewrap">
+            <table class="table" id="participantsTable">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>Club</th>
+                  <th>Arme</th>
+                  <th>Débutant</th>
+                  <th>Présent</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="toggleAllPresent">Tout présent</button>
+            <button class="btn" id="clearAllPresent">Tout absent</button>
+            <button class="btn danger" id="deleteAllParticipants">Supprimer toutes les inscriptions</button>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <h2>Inscriptions</h2>
-
-        <div class="form grid3">
-          <label><span>Nom</span><input id="pNom" placeholder="DUPONT" /></label>
-          <label><span>Prénom</span><input id="pPrenom" placeholder="Camille" /></label>
-          <label><span>Club</span><input id="pClub" placeholder="Club" /></label>
-
-          <label><span>Statut</span>
-            <select id="pDebutant">
-              <option value="false" selected>Confirmé</option>
-              <option value="true">Débutant</option>
-            </select>
-          </label>
-          <label><span>Arme</span>
-            <select id="pArme">
-              <option value="CL" selected>Arc classique (CL)</option>
-              <option value="CO">Poulies (CO)</option>
-              <option value="BB">Bare-bow (BB)</option>
-            </select>
-          </label>
-          <label><span>Blason / zones</span>
-            <input id="pZones" value="Même blason • zones selon profil" disabled />
-          </label>
+      <div id="duelRoundsView" style="display:none; margin-top:12px;">
+        <div class="card" style="box-shadow:none; border:1px solid var(--line);">
+          <h3>Matchs par round</h3>
+          <div id="roundList" class="stack"></div>
         </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- AFFECTATIONS -->
+    <section id="affectations" class="panel">
+      <div class="card">
+        <h2>Distribution des cibles</h2>
+        <p class="note">
+          Objectif : <strong>débutants avec CL/CO</strong> (éviter BB si possible) •
+          <strong>éviter 2 CO</strong> sur la même cible.
+        </p>
 
         <div class="row">
-          <button class="btn primary" id="addParticipant">Ajouter</button>
-          <input id="search" class="search" placeholder="Rechercher (nom, prénom, club)…" />
+          <button class="btn primary" id="autoAssign">Auto-affectation</button>
+          <button class="btn" id="clearAssign">Vider affectations</button>
         </div>
 
         <div class="tablewrap">
-          <table class="table" id="participantsTable">
+          <table class="table" id="assignTable">
             <thead>
               <tr>
-                <th>Nom</th><th>Prénom</th><th>Club</th><th>Arme</th><th>Débutant</th><th>Présent</th><th></th>
+                <th>Cible</th>
+                <th>Position</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Arme</th>
+                <th>Débutant</th>
+                <th>Alertes</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="duelRoundsView" style="display:none; margin-top:12px;">
+        <div class="card" style="box-shadow:none; border:1px solid var(--line);">
+          <h3>Matchs par round</h3>
+          <div id="roundList" class="stack"></div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- QUALIF -->
+    <section id="qualif" class="panel">
+      <div class="card">
+        <h2>Qualif — Saisie du score final</h2>
+
+        <div class="row">
+          <label class="inline">
+            <span>Filtre cible</span>
+            <input id="qualifFilterTarget" type="number" min="1" placeholder="(vide = toutes)" />
+          </label>
+          <label class="inline">
+            <span>Filtre nom</span>
+            <input id="qualifFilterName" placeholder="(vide = tous)" />
+          </label>
+          <button class="btn" id="qualifApplyFilters">Appliquer</button>
+          <button class="btn" id="qualifClearFilters">Effacer</button>
+          <button class="btn primary" id="printQualifTargetSheets">Imprimer feuilles cibles (qualif)</button>
+          <button class="btn" id="printQualifSheets">Imprimer feuilles (1 archer/page)</button>
+        </div>
+
+        <div class="tablewrap">
+          <table class="table" id="qualifTable">
+            <thead>
+              <tr>
+                <th>Cible</th>
+                <th>Pos</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Club</th>
+                <th>Arme</th>
+                <th>Déb.</th>
+                <th>Score final</th>
+                <th>Validé</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
         </div>
 
+        <p class="note">Astuce : tu peux saisir des scores sans avoir fait l’affectation (cible vide).</p>
+      </div>
+    </section>
+
+    <!-- CLASSEMENT -->
+    <section id="classement" class="panel">
+      <div class="card">
+        <h2>Classement (catégorie unique)</h2>
         <div class="row">
-          <button class="btn" id="toggleAllPresent">Tout présent</button>
-          <button class="btn" id="clearAllPresent">Tout absent</button>
+          <button class="btn primary" id="computeRanking">Calculer</button>
+          <button class="btn" id="exportRankingCsv">Exporter CSV</button>
+        </div>
+        <div class="tablewrap">
+          <table class="table" id="rankingTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Club</th>
+                <th>Arme</th>
+                <th>Débutant</th>
+                <th>Total</th>
+                <th>Présent</th>
+                <th>Validé</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="note">Le classement utilise uniquement les archers <strong>présents</strong>.</p>
+      </div>
+    </section>
+
+    <!-- DUELS -->
+    <section id="duels" class="panel">
+      <div class="card">
+        <h2>Duels — Double élimination (winners + losers)</h2>
+
+        <div class="row">
+          <button class="btn primary" id="buildBracket">Générer depuis classement</button>
+          <button class="btn" id="autoAssignDuelTargets">Auto-affecter cibles (duels)</button>
+          <button class="btn" id="resetBracket">Réinitialiser les duels</button>
+        </div>
+
+        <div class="note">
+          Saisie par <strong>sets</strong> : tu entres les <strong>scores réalisés sur chaque set</strong> (ex 28–26),
+          et l’app calcule les <strong>points de set</strong> (2/0, 1/1 si égalité). Le premier à <strong
+            id="duelToWinLabel">5</strong> points gagne.
+          Clique sur un match pour saisir les sets.
+        </div>
+
+        <div class="row">
+          <button class="btn" id="viewBracketBtn">Vue arbre</button>
+          <button class="btn" id="viewRoundsBtn">Vue round par round</button>
+          <button class="btn" id="printDuelPlan">Imprimer plan des duels</button>
+          <button class="btn primary" id="printDuelMatchSheets">Imprimer feuilles (duels)</button>
+        </div>
+
+        <div id="duelBracketView">
+          <div class="brackets">
+            <div class="bracket-block">
+              <h3>Winners bracket</h3>
+              <div id="winnersBracket" class="bracket"></div>
+            </div>
+            <div class="bracket-block">
+              <h3>Losers bracket</h3>
+              <div id="losersBracket" class="bracket"></div>
+            </div>
+            <div class="bracket-block">
+              <h3>Finale</h3>
+              <div id="finalBracket" class="bracket"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="duelRoundsView" style="display:none; margin-top:12px;">
+          <div class="card" style="box-shadow:none; border:1px solid var(--line);">
+            <h3>Matchs par round</h3>
+            <div id="roundList" class="stack"></div>
+          </div>
         </div>
       </div>
-      </div>
+    </section>
 
-      <div id="duelRoundsView" style="display:none; margin-top:12px;">
-        <div class="card" style="box-shadow:none; border:1px solid var(--line);">
-          <h3>Matchs par round</h3>
-          <div id="roundList" class="stack"></div>
+    <!-- OUTILS -->
+    <section id="outils" class="panel">
+      <div class="card">
+        <h2>Sauvegarde / Import</h2>
+        <div class="row">
+          <button class="btn" id="exportJson">Exporter JSON</button>
+          <input type="file" id="importJsonFile" accept="application/json" />
+          <button class="btn" id="importJson">Importer JSON</button>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- AFFECTATIONS -->
-  <section id="affectations" class="panel">
-    <div class="card">
-      <h2>Distribution des cibles</h2>
-      <p class="note">
-        Objectif : <strong>débutants avec CL/CO</strong> (éviter BB si possible) •
-        <strong>éviter 2 CO</strong> sur la même cible.
-      </p>
+        <hr class="sep" />
 
-      <div class="row">
-        <button class="btn primary" id="autoAssign">Auto-affectation</button>
-        <button class="btn" id="clearAssign">Vider affectations</button>
-      </div>
-
-      <div class="tablewrap">
-        <table class="table" id="assignTable">
-          <thead>
-            <tr>
-              <th>Cible</th><th>Position</th><th>Nom</th><th>Prénom</th><th>Arme</th><th>Débutant</th><th>Alertes</th><th></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      </div>
-
-      <div id="duelRoundsView" style="display:none; margin-top:12px;">
-        <div class="card" style="box-shadow:none; border:1px solid var(--line);">
-          <h3>Matchs par round</h3>
-          <div id="roundList" class="stack"></div>
+        <h2>Import CSV (optionnel)</h2>
+        <p class="note">Colonnes : nom,prenom,club,arme,debutant,present,qualif_total,qualif_validated</p>
+        <div class="row">
+          <input type="file" id="csvFile" accept=".csv,text/csv" />
+          <button class="btn" id="importCsv">Importer CSV</button>
+          <button class="btn" id="downloadCsvTemplate">Modèle CSV</button>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- QUALIF -->
-  <section id="qualif" class="panel">
-    <div class="card">
-      <h2>Qualif — Saisie du score final</h2>
+        <hr class="sep" />
 
-      <div class="row">
-        <label class="inline">
-          <span>Filtre cible</span>
-          <input id="qualifFilterTarget" type="number" min="1" placeholder="(vide = toutes)" />
-        </label>
-        <label class="inline">
-          <span>Filtre nom</span>
-          <input id="qualifFilterName" placeholder="(vide = tous)" />
-        </label>
-        <button class="btn" id="qualifApplyFilters">Appliquer</button>
-        <button class="btn" id="qualifClearFilters">Effacer</button>
-        <button class="btn primary" id="printQualifTargetSheets">Imprimer feuilles cibles (qualif)</button>
-        <button class="btn" id="printQualifSheets">Imprimer feuilles (1 archer/page)</button>
-      </div>
-
-      <div class="tablewrap">
-        <table class="table" id="qualifTable">
-          <thead>
-            <tr>
-              <th>Cible</th><th>Pos</th><th>Nom</th><th>Prénom</th><th>Club</th><th>Arme</th><th>Déb.</th>
-              <th>Score final</th><th>Validé</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <p class="note">Astuce : tu peux saisir des scores sans avoir fait l’affectation (cible vide).</p>
-    </div>
-  </section>
-
-  <!-- CLASSEMENT -->
-  <section id="classement" class="panel">
-    <div class="card">
-      <h2>Classement (catégorie unique)</h2>
-      <div class="row">
-        <button class="btn primary" id="computeRanking">Calculer</button>
-        <button class="btn" id="exportRankingCsv">Exporter CSV</button>
-      </div>
-      <div class="tablewrap">
-        <table class="table" id="rankingTable">
-          <thead>
-            <tr>
-              <th>#</th><th>Nom</th><th>Prénom</th><th>Club</th><th>Arme</th><th>Débutant</th><th>Total</th><th>Présent</th><th>Validé</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <p class="note">Le classement utilise uniquement les archers <strong>présents</strong>.</p>
-    </div>
-  </section>
-
-  <!-- DUELS -->
-  <section id="duels" class="panel">
-    <div class="card">
-      <h2>Duels — Double élimination (winners + losers)</h2>
-
-      <div class="row">
-        <button class="btn primary" id="buildBracket">Générer depuis classement</button>
-        <button class="btn" id="autoAssignDuelTargets">Auto-affecter cibles (duels)</button>
-        <button class="btn" id="resetBracket">Réinitialiser les duels</button>
-      </div>
-
-      <div class="note">
-        Saisie par <strong>sets</strong> : tu entres les <strong>scores réalisés sur chaque set</strong> (ex 28–26),
-        et l’app calcule les <strong>points de set</strong> (2/0, 1/1 si égalité). Le premier à <strong id="duelToWinLabel">5</strong> points gagne.
-        Clique sur un match pour saisir les sets.
-      </div>
-
-            <div class="row">
-        <button class="btn" id="viewBracketBtn">Vue arbre</button>
-        <button class="btn" id="viewRoundsBtn">Vue round par round</button>
-        <button class="btn" id="printDuelPlan">Imprimer plan des duels</button>
-        <button class="btn primary" id="printDuelMatchSheets">Imprimer feuilles (duels)</button>
-      </div>
-
-      <div id="duelBracketView">
-      <div class="brackets">
-        <div class="bracket-block">
-          <h3>Winners bracket</h3>
-          <div id="winnersBracket" class="bracket"></div>
+        <h2>Calque d'impression (logo / éléments)</h2>
+        <p class="note">Optionnel : ajoute un calque (image PNG/JPG) par-dessus les feuilles imprimées (utile pour
+          logos, bandeaux, sponsors…).</p>
+        <div class="row">
+          <input type="file" id="overlayFile" accept="image/*" />
+          <label class="inline"><span style="color:var(--muted);font-size:12px;">Activer</span><input type="checkbox"
+              id="overlayEnabled" /></label>
         </div>
-        <div class="bracket-block">
-          <h3>Losers bracket</h3>
-          <div id="losersBracket" class="bracket"></div>
-        </div>
-        <div class="bracket-block">
-          <h3>Finale</h3>
-          <div id="finalBracket" class="bracket"></div>
-        </div>
-      </div>
-      </div>
+        <div class="form grid2" style="margin-top:10px;">
+          <label><span>X (mm)</span><input id="overlayX" type="number" value="10" /></label>
+          <label><span>Y (mm)</span><input id="overlayY" type="number" value="10" /></label>
+          <label><span>Largeur (mm)</span><input id="overlayW" type="number" value="40" /></label>
+          <label><span>Opacité (0-1)</span><input id="overlayOpacity" type="number" step="0.05" value="0.25" /></label>
 
-      <div id="duelRoundsView" style="display:none; margin-top:12px;">
-        <div class="card" style="box-shadow:none; border:1px solid var(--line);">
-          <h3>Matchs par round</h3>
-          <div id="roundList" class="stack"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OUTILS -->
-  <section id="outils" class="panel">
-    <div class="card">
-      <h2>Sauvegarde / Import</h2>
-      <div class="row">
-        <button class="btn" id="exportJson">Exporter JSON</button>
-        <input type="file" id="importJsonFile" accept="application/json" />
-        <button class="btn" id="importJson">Importer JSON</button>
-      </div>
-
-      <hr class="sep"/>
-
-      <h2>Import CSV (optionnel)</h2>
-      <p class="note">Colonnes : nom,prenom,club,arme,debutant,present,qualif_total,qualif_validated</p>
-      <div class="row">
-        <input type="file" id="csvFile" accept=".csv,text/csv" />
-        <button class="btn" id="importCsv">Importer CSV</button>
-        <button class="btn" id="downloadCsvTemplate">Modèle CSV</button>
-      </div>
-    
-      <hr class="sep"/>
-
-      <h2>Calque d'impression (logo / éléments)</h2>
-      <p class="note">Optionnel : ajoute un calque (image PNG/JPG) par-dessus les feuilles imprimées (utile pour logos, bandeaux, sponsors…).</p>
-      <div class="row">
-        <input type="file" id="overlayFile" accept="image/*" />
-        <label class="inline"><span style="color:var(--muted);font-size:12px;">Activer</span><input type="checkbox" id="overlayEnabled"/></label>
-      </div>
-      <div class="form grid2" style="margin-top:10px;">
-        <label><span>X (mm)</span><input id="overlayX" type="number" value="10" /></label>
-        <label><span>Y (mm)</span><input id="overlayY" type="number" value="10" /></label>
-        <label><span>Largeur (mm)</span><input id="overlayW" type="number" value="40" /></label>
-        <label><span>Opacité (0-1)</span><input id="overlayOpacity" type="number" step="0.05" value="0.25" /></label>
-      
           <label>
             <span>Phase finale : 2 cibles par duel (1 archer/cible) à partir de</span>
             <select id="cfgFinalFromW">
@@ -332,47 +368,46 @@
               <option value="3" selected>Quarts de finale</option>
             </select>
           </label>
-</div>
+        </div>
+        <div class="row">
+          <button class="btn" id="saveOverlay">Enregistrer calque</button>
+          <button class="btn danger" id="clearOverlay">Supprimer calque</button>
+        </div>
+
+      </div>
+    </section>
+  </main <!-- MODAL DUELS (SETS) -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__overlay" id="modalOverlay"></div>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal__header">
+        <div>
+          <div class="modal__title" id="modalTitle">Saisie match</div>
+          <div class="modal__sub" id="modalSub"></div>
+        </div>
+        <button class="btn" id="modalClose">Fermer</button>
+      </div>
+
+      <p class="note" style="margin-top:0;">
+        Renseigne jusqu’à 5 sets (scores réalisés). L’app calcule les points de set.
+        <br />Ex : Set 1 : 28 vs 26 → +2 / +0. Égalité → +1 / +1.
+      </p>
+
+      <div class="sets" id="setsGrid"></div>
+
+      <div class="row" style="justify-content:space-between;">
+        <div class="pill" id="setPointsPreview">Points de set : —</div>
+        <div class="pill" id="winnerPreview">Gagnant : —</div>
+      </div>
+
       <div class="row">
-        <button class="btn" id="saveOverlay">Enregistrer calque</button>
-        <button class="btn danger" id="clearOverlay">Supprimer calque</button>
+        <button class="btn primary" id="modalSave">Enregistrer</button>
+        <button class="btn" id="modalClear">Effacer score</button>
       </div>
-
-</div>
-  </section>
-</main
-
-<!-- MODAL DUELS (SETS) -->
-<div class="modal" id="modal" aria-hidden="true">
-  <div class="modal__overlay" id="modalOverlay"></div>
-  <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal__header">
-      <div>
-        <div class="modal__title" id="modalTitle">Saisie match</div>
-        <div class="modal__sub" id="modalSub"></div>
-      </div>
-      <button class="btn" id="modalClose">Fermer</button>
-    </div>
-
-    <p class="note" style="margin-top:0;">
-      Renseigne jusqu’à 5 sets (scores réalisés). L’app calcule les points de set.
-      <br/>Ex : Set 1 : 28 vs 26 → +2 / +0. Égalité → +1 / +1.
-    </p>
-
-    <div class="sets" id="setsGrid"></div>
-
-    <div class="row" style="justify-content:space-between;">
-      <div class="pill" id="setPointsPreview">Points de set : —</div>
-      <div class="pill" id="winnerPreview">Gagnant : —</div>
-    </div>
-
-    <div class="row">
-      <button class="btn primary" id="modalSave">Enregistrer</button>
-      <button class="btn" id="modalClear">Effacer score</button>
     </div>
   </div>
-</div>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>
